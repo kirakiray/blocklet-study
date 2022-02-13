@@ -1,0 +1,12 @@
+.container {
+  padding: 0;
+}
+.line {
+  display: flex;
+}
+.line .key {
+  width: 200px;
+}
+.line .value {
+  flex: 1;
+}

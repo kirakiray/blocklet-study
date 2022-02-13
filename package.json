@@ -1,0 +1,14 @@
+{
+  "name": "blocklet-study",
+  "version": "0.1.0",
+  "main": "main.js",
+  "repository": "https://github.com/kirakiray/blocklet-study.git",
+  "author": "YAO <kirayao@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^17.0.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}

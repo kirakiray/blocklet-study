@@ -4,8 +4,9 @@ Page(async ({ load }) => {
   return {
     data: {
       val: "asdasd",
-      nodeVersion: "Loading",
-      blockletVersion: "Loading",
+      nodeVersion: "",
+      blockletVersion: "",
+      step: 0,
     },
     ready() {
       runcmd("node --version")

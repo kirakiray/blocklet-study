@@ -1,21 +1,28 @@
 <link rel="stylesheet" href="./home.css" />
 <div class="container">
   <div class="article" class:in-left="step > 0">
-    <div style="margin-bottom: 30px">
-      <img src="./logo.svg" />
-    </div>
-    欢迎使用 ArcBlock <br />
-    ArcBlock 是你的专属去中心化开发平台，
-    让去中心化应用、区块链、分布式账本技术开发精简至极。
-    <div style="margin-top: 20px">
-      <button @click="step = 1">下一步</button>
+    <div class="article-content">
+      <div style="margin-bottom: 30px">
+        <img src="./logo.svg" />
+      </div>
+      欢迎使用 ArcBlock <br />
+      ArcBlock 是你的专属去中心化开发平台，
+      让去中心化应用、区块链、分布式账本技术开发精简至极。
+      <div #if="nodeVersion === ''" class="tips" style="margin-top: 20px">
+        检查环境中...
+      </div>
+      <div #else style="margin-top: 20px">
+        <button @click="clickNext(0)">下一步</button>
+      </div>
     </div>
   </div>
   <div class="article" class:in-left="step > 1" class:in-right="step < 1">
-    <div>正在检查 Nodejs 环境</div>
-    <div></div>
+    <div>请先安装 Nodejs 环境</div>
+    <div class="link" @click="openNodejs">https://nodejs.org/en/</div>
+    <div>安装完成后，点击重新检查</div>
     <div style="margin-top: 20px">
-      <button @click="step = 2">下一步</button>
+      <button @click="clickNext(1)" #if="!nodejsChecking">重新检查</button>
+      <div class="tips" #else>检查Nodejs中...</div>
     </div>
   </div>
   <div class="article" class:in-left="step > 2" class:in-right="step < 2">

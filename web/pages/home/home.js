@@ -1,5 +1,5 @@
 Page(async ({ load }) => {
-  const runcmd = await load("../../util/runcmd.js");
+  const { run: runcmd, test } = await load("../../util/cmd.js");
 
   return {
     data: {
@@ -8,7 +8,8 @@ Page(async ({ load }) => {
       nodejsChecking: false,
       blockletVersion: "",
       blockletChecking: false,
-      step: 0,
+      step: 2,
+      blockletInstalling: false,
     },
     proto: {
       // 检查本地Node环境
@@ -28,7 +29,7 @@ Page(async ({ load }) => {
       },
       checkBlocklet() {
         this.blockletChecking = true;
-        return runcmd("blocklet --version")
+        return runcmd("blocklet2 --version")
           .then((e) => {
             this.blockletVersion = e;
           })
@@ -45,8 +46,10 @@ Page(async ({ load }) => {
           case 0:
             if (this.nodeVersion === false) {
               this.step = 1;
-            } else {
+            } else if (this.blockletVersion === false) {
               this.step = 2;
+            } else {
+              this.step = 3;
             }
             break;
           case 1:
@@ -56,10 +59,29 @@ Page(async ({ load }) => {
               }
             });
             break;
+          case 2:
+            if (this.blockletVersion) {
+              this.step = 3;
+            }
+            break;
         }
       },
       openNodejs() {
         mainAPI.shell.openExternal("https://nodejs.org/en/");
+      },
+      installBlockletCli() {
+        this.blockletInstalling = true;
+        return runcmd("npm install -g @blocklet/cli")
+          .then((e) => {
+            this.blockletInstalling = false;
+            this.clickNext();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      testapp() {
+        test();
       },
     },
     ready() {

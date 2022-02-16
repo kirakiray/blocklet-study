@@ -8,7 +8,11 @@
       欢迎使用 ArcBlock <br />
       ArcBlock 是你的专属去中心化开发平台，
       让去中心化应用、区块链、分布式账本技术开发精简至极。
-      <div #if="nodeVersion === ''" class="tips" style="margin-top: 20px">
+      <div
+        #if="nodeVersion === '' || blockletVersion === ''"
+        class="tips"
+        style="margin-top: 20px"
+      >
         检查环境中...
       </div>
       <div #else style="margin-top: 20px">
@@ -26,11 +30,22 @@
     </div>
   </div>
   <div class="article" class:in-left="step > 2" class:in-right="step < 2">
-    <div>正在检查 ArcBlock 开发环境</div>
-    <div></div>
-    <div style="margin-top: 20px">
-      <button @click="step = 2">创建一个Server实例</button>
+    <div>运行一下命令安装 Blocklet CLI</div>
+    <div class="code-container" style="margin-top: 10px; user-select: all">
+      npm install -g @blocklet/cli
     </div>
+    <div style="margin: 10px 0">或</div>
+    <div>
+      <button @click="installBlockletCli" #if="!blockletInstalling">
+        点击安装 Blocklet/Cli
+      </button>
+      <div class="tips" #else>正在安装Blocklet/cli...</div>
+    </div>
+    <button @click="testapp">测试</button>
+  </div>
+  <div class="article" class:in-left="step > 3" class:in-right="step < 3">
+    <div>创建并运行一个Server实例</div>
+    <button>创建一个Server项目</button>
   </div>
 </div>
 <!-- 开发提示信息 -->

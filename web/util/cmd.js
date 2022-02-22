@@ -1,5 +1,5 @@
 define(() => {
-  const { childProcess, fs } = mainAPI;
+  const { childProcess, fs, testaa } = mainAPI;
 
   return {
     run: (cmd) => {
@@ -20,6 +20,35 @@ define(() => {
           }
         );
       });
+    },
+    test() {
+      // var exec = childProcess.exec;
+      // var coffeeProcess = exec("ls /usr");
+
+      // coffeeProcess.stdout.on("data", function (data) {
+      //   console.log(data);
+      // });
+
+      testaa();
+      // const { spawn } = childProcess;
+
+      // const ls = spawn("ls", ["-la"]);
+
+      // ls.stdout.on("data", (data) => {
+      //   console.log(`stdout: ${data}`);
+      // });
+
+      // ls.stderr.on("data", (data) => {
+      //   console.log(`stderr: ${data}`);
+      // });
+
+      // ls.on("error", (error) => {
+      //   console.log(`error: ${error.message}`);
+      // });
+
+      // ls.on("close", (code) => {
+      //   console.log(`child process exited with code ${code}`);
+      // });
     },
   };
 });

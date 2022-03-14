@@ -5,10 +5,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const { contextBridge } = require("electron");
 
-  function testaa() {
-    const { spawn } = childProcess;
+  const runCwd = (...args) => {
+    const { spawn, exec } = childProcess;
 
-    const ls = spawn("ls", ["-la"]);
+    const ls = exec(...args);
 
     ls.stdout.on("data", (data) => {
       console.log(`stdout: ${data}`);
@@ -24,6 +24,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ls.on("close", (code) => {
       console.log(`child process exited with code ${code}`);
+    });
+  };
+
+  function testaa() {
+    // runCwd("ls", ["-la"], {
+    //   cwd: "/Users/huangyao/Documents/ArcBlock/blocklet-study/testdir",
+    // });
+    runCwd("npm init", {
+      cwd: "/Users/huangyao/Documents/ArcBlock/blocklet-study/testdir",
     });
   }
 
